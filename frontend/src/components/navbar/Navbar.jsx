@@ -95,19 +95,20 @@ function NavBar({ user }) {
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 
-                        {user ? <> <MenuItem>
+                        {user.isLoggedIn ? <> <MenuItem>
                             <Typography textAlign="center"><Link to="/blog">MY BLOG</Link></Typography>
                         </MenuItem>
                             <MenuItem>
                                 <Typography textAlign="center"><Link to="/blog/create">NEW BLOG</Link></Typography>
                             </MenuItem>
                         </> : ""}
-                        <MenuItem>
+
+                        {!user.isLoggedIn && <> <MenuItem>
                             <Typography textAlign="center"><Link to="/register">REGISTER</Link></Typography>
                         </MenuItem>
-                        <MenuItem>
-                            <Typography textAlign="center"><Link to="/login">LOGIN</Link></Typography>
-                        </MenuItem>
+                            <MenuItem>
+                                <Typography textAlign="center"><Link to="/login">LOGIN</Link></Typography>
+                            </MenuItem></>}
 
 
                     </Box>

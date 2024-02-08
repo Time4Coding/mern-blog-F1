@@ -46,4 +46,32 @@ const login = async (req, res) => {
     }
 }
 
-module.exports = { register, login }
+const me = async (req, res) => {
+    if (req.cookies.authToken) {
+        try {
+            const decoded = jwt.verify(req.cookies.authToken, process.env.SECRET_KEY)
+            res.status(200).json({
+                name: decoded.name,
+                isLoggedIn: true
+            })
+        } catch (error) {
+            console.log(error.message)
+            res.status(403).json({
+                message: "not authorized",
+                name: "",
+                isLoggedIn: false
+            })
+
+        }
+
+    } else
+        if (!req.cookies.authToken) {
+            res.status(403).json({
+                message: "not authorized",
+                name: "",
+                isLoggedIn: false
+            })
+        }
+}
+
+module.exports = { register, login, me }

@@ -1,10 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from "axios"
+import { useNavigate } from 'react-router-dom';
 
 import "./login.css"
 
-export default function Login({ verifyLogin }) {
+export default function Login() {
+    const navigate = useNavigate()
     const [userLogin, setUserLogin] = useState({
         email: "",
         password: ""
@@ -21,10 +23,9 @@ export default function Login({ verifyLogin }) {
             alert("plz add all field")
         } else {
             const res = await axios.post("http://localhost:3310/api/user/login", userLogin, { withCredentials: true })
+            navigate("/")
+            window.location.reload()
 
-
-            alert(res.data.message)
-            verifyLogin(true)
         }
 
     }

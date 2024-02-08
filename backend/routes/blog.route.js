@@ -8,7 +8,7 @@ const router = express.Router()
 //@route /blog
 //@access Private 
 router.post("/create", verifyToken, createBlog)
-router.get("/", getBlog)
+router.get("/", verifyToken, getBlog)
 
 
 

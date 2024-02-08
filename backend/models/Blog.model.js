@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const blogSchema = mongoose.Schema({
-    titel: {
+    title: {
         type: String,
         required: true,
         min: 3,
