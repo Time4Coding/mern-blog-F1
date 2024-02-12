@@ -3,23 +3,27 @@ import { useEffect, useState } from 'react'
 import BlogCard from './BlogCard';
 
 export default function BlogList() {
-    const [blogs, setBlogs] = useState([]);
+    const [blogs, setBlogs] = useState({
+        blogs: [],
+        isLoading: false,
+
+    });
     useEffect(() => {
         const fetchBlogs = async () => {
             const blogs = await axios.get("http://localhost:3310/api/blog/", { withCredentials: true })
-            setBlogs(blogs.data)
+            setBlogs({
+                blogs: blogs.data,
+                isLoading: false
+            })
         }
         fetchBlogs()
     }, [])
-    console.log(blogs)
+
     return (
         <div>
             <h1>List Of Blogs</h1>
             <div>
-                {blogs.map((blog) => (<div>
-                    <h3>{blog.title}</h3>
-                    <p>{blog.desc}</p>
-                </div>))}
+                {blogs.blogs.map((blog) => (<BlogCard key={blog._id} blog={blog} />))}
             </div>
         </div>
     )

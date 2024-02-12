@@ -73,5 +73,23 @@ const me = async (req, res) => {
             })
         }
 }
+const logout = (req, res) => {
+    const authToken = req.cookies.authToken
+    if (authToken) {
+        res.clearCookie("authToken").json({ message: "Logged out" })
+    } else {
+        res.json({ message: "no token" })
+    }
+}
 
-module.exports = { register, login, me }
+const profile = async (req, res) => {
+    const { id } = req.user
+    try {
+        const user = await User.findById(id).select("-password")
+        res.send(user)
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+module.exports = { register, login, me, logout, profile }

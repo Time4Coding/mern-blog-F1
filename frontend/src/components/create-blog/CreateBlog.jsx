@@ -26,7 +26,7 @@ export default function CreateBlog() {
             <form onSubmit={handleSubmit}>
                 <label className="blog-label" htmlFor="title">Titel</label>
                 <input name="title" type="text" onChange={handleChange} required="true" />
-                <label className="blog-label" htmlFor="desc">Descreption</label>
+                <label className="blog-label" htmlFor="desc">Description</label>
                 <textarea name="desc" id="" cols="30" rows="10" onChange={handleChange} required="true" />
                 <button>CREATE</button>
             </form>
